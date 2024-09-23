@@ -36,23 +36,25 @@ public class Pawn implements Piece {
   public List<Move> getAllowedMoves(Coordinates from, Board board) {
     var allowedMoves = new ArrayList<Move>();
 
+    board.get(from.plus(-1,0));
 
 
-    if (getColour().equals(PlayerColour.WHITE)) {
-      if (from.getRow() == 6) {
-      allowedMoves.add(new Move(from, from.plus(-2, 0)));
-      } else if  ()
-          allowedMoves.add(new Move(from, from.plus(-1, 0)));
+
+    if (getColour().equals(PlayerColour.WHITE )) {
+      if (from.getRow() == 6 && board.get(from.plus(-2,0)) == null ) {
+        allowedMoves.add(new Move(from, from.plus(-2, 0)));
+      }
+      if (from.getRow() > 0 && board.get(from.plus(-1,0)) == null ){
+        allowedMoves.add(new Move(from, from.plus(-1, 0)));}
 
     }
-
-
 // black Pawns
 else{
-      if (from.getRow() == 1){
+      if (from.getRow() == 1 &&  board.get(from.plus(2,0)) == null){
         allowedMoves.add(new Move(from, from.plus(2, 0)));
       }
-      allowedMoves.add(new Move(from, from.plus(1, 0)));
+      if (from.getRow() < 7 &&  board.get(from.plus(1,0)) == null){
+      allowedMoves.add(new Move(from, from.plus(1, 0)));}
     }
     // TODO Implement this!
     return allowedMoves;
