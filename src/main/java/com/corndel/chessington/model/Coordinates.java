@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
 
 public final class Coordinates {
+
   private final int row;
   private final int col;
 
