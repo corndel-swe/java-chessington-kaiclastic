@@ -11,4 +11,19 @@ public abstract class AbstractPiece implements Piece {
     this.type = type;
     this.colour = colour;
   }
+
+
+  public PieceType getType() {
+    return type;
+  }
+
+
+  public PlayerColour getColour() {
+    return colour;
+  }
+
+  public String toString() {
+    return colour.toString() + " " + type.toString();
+  }
+
 }

@@ -7,30 +7,13 @@ import com.corndel.chessington.model.PlayerColour;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pawn implements Piece {
-
-  private final Piece.PieceType type;
-  protected final PlayerColour colour;
+public class Pawn extends AbstractPiece {
 
   public Pawn(PlayerColour colour) {
-    this.type = PieceType.PAWN;
-    this.colour = colour;
+      super(PieceType.PAWN,colour);
   }
 
-  @Override
-  public Piece.PieceType getType() {
-    return type;
-  }
 
-  @Override
-  public PlayerColour getColour() {
-    return colour;
-  }
-
-  @Override
-  public String toString() {
-    return colour.toString() + " " + type.toString();
-  }
 
   @Override
   public List<Move> getAllowedMoves(Coordinates from, Board board) {
@@ -39,13 +22,18 @@ public class Pawn implements Piece {
     board.get(from.plus(-1,0));
 
 
-
-    if (getColour().equals(PlayerColour.WHITE )) {
-      if (from.getRow() == 6 && board.get(from.plus(-2,0)) == null ) {
+// white pawns
+    if (getColour().equals(PlayerColour.WHITE)) {
+      // intitial Pawn movement
+      if (from.getRow() == 6 && board.get(from.plus(-2,0)) == null && board.get(from.plus(-2,-2)) == null ) {
         allowedMoves.add(new Move(from, from.plus(-2, 0)));
       }
-      if (from.getRow() > 0 && board.get(from.plus(-1,0)) == null ){
-        allowedMoves.add(new Move(from, from.plus(-1, 0)));}
+      // diagonal Movement
+      if (from.getRow() > 0 && from.getCol() > 0 && board.get(from.plus(-1,0)) == null){
+        allowedMoves.add(new Move(from, from.plus (-1, 0)));
+        allowedMoves.add(new Move(from, from.plus (-1, -1)));
+        allowedMoves.add(new Move(from, from.plus (-1, 1)));
+     }
 
     }
 // black Pawns
@@ -53,8 +41,13 @@ else{
       if (from.getRow() == 1 &&  board.get(from.plus(2,0)) == null){
         allowedMoves.add(new Move(from, from.plus(2, 0)));
       }
-      if (from.getRow() < 7 &&  board.get(from.plus(1,0)) == null){
-      allowedMoves.add(new Move(from, from.plus(1, 0)));}
+
+      //  diagonal Movement
+      if (from.getRow() < 7 &&  from.getCol() < 7 && board.get(from.plus(1,0)) == null ){
+      allowedMoves.add(new Move(from, from.plus(1, 0)));
+        allowedMoves.add(new Move(from, from.plus (1, 1)));
+        allowedMoves.add(new Move(from, from.plus (1, -1)));
+      }
     }
     // TODO Implement this!
     return allowedMoves;

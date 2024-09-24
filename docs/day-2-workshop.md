@@ -1,3 +1,4 @@
+
 # Day 2 Workshop
 
 ## Refactoring
