@@ -1,5 +1,5 @@
 package com.corndel.exercises;
-
+/*
 public class Square {
   private double side;
 
@@ -23,3 +23,17 @@ public class Square {
     return this.side;
   }
 }
+*/
+
+public class Square extends Rectangle{
+  public static int side;
+  public Square(int side) {
+    super(side, side);
+  }
+  public static void main(String[] args) {
+    Square square = new Square(4);
+    System.out.println(square.getWidth());
+  }
+}
+
+

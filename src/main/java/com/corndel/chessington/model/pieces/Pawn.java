@@ -7,41 +7,51 @@ import com.corndel.chessington.model.PlayerColour;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pawn implements Piece {
-
-  private final Piece.PieceType type;
-  protected final PlayerColour colour;
+public class Pawn extends AbstractPiece {
 
   public Pawn(PlayerColour colour) {
-    this.type = PieceType.PAWN;
-    this.colour = colour;
+      super(PieceType.PAWN,colour);
   }
 
-  @Override
-  public Piece.PieceType getType() {
-    return type;
-  }
 
-  @Override
-  public PlayerColour getColour() {
-    return colour;
-  }
-
-  @Override
-  public String toString() {
-    return colour.toString() + " " + type.toString();
-  }
 
   @Override
   public List<Move> getAllowedMoves(Coordinates from, Board board) {
     var allowedMoves = new ArrayList<Move>();
-    if (getColour().equals(PlayerColour.WHITE)) {
-      allowedMoves.add(new Move(from, from.plus(-1, 0)));
-    } else {
-      allowedMoves.add(new Move(from, from.plus(1, 0)));
-    }
 
+
+
+
+// white pawns
+    if (getColour().equals(PlayerColour.WHITE)) {
+      // initial Pawn movement is two squared
+      if (from.getRow() == 6 && board.get(from.plus(-2,0)) == null && board.get(from.plus(-2,-2)) == null ) {
+        allowedMoves.add(new Move(from, from.plus(-2, 0)));
+      }
+        //  diagonal Movement and contained within Board
+      if (from.getRow() > 0 && from.getCol() > 0 && board.get(from.plus(-1,0)) == null){
+        allowedMoves.add(new Move(from, from.plus (-1, 0)));
+        allowedMoves.add(new Move(from, from.plus (-1, -1)));
+        allowedMoves.add(new Move(from, from.plus (-1, 1)));
+     }
+
+    }
+// black Pawns
+else{
+      if (from.getRow() == 1 &&  board.get(from.plus(2,0)) == null){
+        allowedMoves.add(new Move(from, from.plus(2, 0)));
+      }
+
+      //  diagonal Movement and contained within Board
+        // current pawn is row  & column  less than 7 take move forward
+      if (from.getRow() < 7 &&
+              from.getCol() < 7 && board.get(from.plus(1,0)) == null ){
+      allowedMoves.add(new Move(from, from.plus(1, 0)));
+        allowedMoves.add(new Move(from, from.plus (1, 1)));
+        allowedMoves.add(new Move(from, from.plus (1, -1)));
+      }
+    }
     // TODO Implement this!
-    return List.of();
+    return allowedMoves;
   }
 }
