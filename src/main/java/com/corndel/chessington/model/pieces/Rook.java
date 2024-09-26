@@ -29,10 +29,10 @@ public class Rook extends AbstractPiece  {
 
 
       // black Rook
-      else {
-
-
-      }
+//      else {
+//
+//
+//      }
     }
 
     return allowedMoves;
