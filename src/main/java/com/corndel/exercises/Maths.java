@@ -23,4 +23,11 @@ public class Maths {
         return (int) x + 1;
     }
 
+    public static int absolute(int x) {
+        if (x<0){
+            return x+-x+-x;
+        }
+        return x ;
+    }
+
 }

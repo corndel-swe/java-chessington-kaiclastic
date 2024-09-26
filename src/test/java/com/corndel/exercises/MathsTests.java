@@ -14,10 +14,8 @@ public class MathsTests {
 
         assertEquals(-8.0,Maths.max(-93,-8));
     }
-
     @Test
     public void mixedMathMax() {
-
         assertEquals(93.0,Maths.max(93,-8));
     }
     @Test
@@ -58,11 +56,22 @@ public class MathsTests {
     public void mathsCeil() {
         // arrange
         double expectedRound = 9.1;
-
         // assert && act
         assertEquals(10,Maths.ceil(expectedRound));
     }
 
 
+    @Test
+    public void absolute() {
+        // arrange
+        // assert && act
+        assertEquals(7,Maths.absolute(-7));
+    }
+    @Test
+    public void positiveabs() {
+        // arrange
+        // assert && act
+        assertEquals(7,Maths.absolute(7));
+    }
 
 }
